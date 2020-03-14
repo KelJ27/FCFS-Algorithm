@@ -1,3 +1,4 @@
+// Header File for the Process Class
 #pragma once
 #include <string>
 #include <queue>
@@ -20,9 +21,9 @@ public:
 	Process(int bursts[], int i_o[], string name, int burstSize, int ioSize);		// Default constructor
 	~Process();																		// Destructor
 
-	queue<int> getBursts() { return bursts; }
-	queue<int> getI_O() { return i_o; }
-	string getName() { return name; }
+	queue<int> getBursts() { return bursts; }    // Getter for bursts
+	queue<int> getI_O() { return i_o; }			 // Getter for I_O
+	string getName() { return name; }			 // Getter for name
 };
 
 

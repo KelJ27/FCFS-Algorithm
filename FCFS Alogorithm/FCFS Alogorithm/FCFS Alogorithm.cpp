@@ -1,5 +1,5 @@
 // FCFS Algorithm.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+
 
 #include <iostream>
 #include <string>
@@ -8,6 +8,16 @@
 #include "Process.h"
 using namespace std;
 
+// Global variables
+queue<Process> readyQueue;   // Queue variable that holds all the processes in the Ready Queue
+queue<Process> ioQueue;		 // Queue variable that holds all the processes in the I/O Queue
+queue<Process> completed;    // Queue variable that holds all the comleted process
+queue<Process> processList;  // Queue that holds all processes. Only used to do final calculations
+int currentTime = 0;			 // The current time of the scheduling algorithm. 
+
+/*--------------Constructors, Class Methods, Destructor-----------------------------*/
+
+// Default Constructor
 Process::Process(int bursts[], int i_o[], string name, int burstSize, int ioSize)
 {
 	int i;
@@ -27,10 +37,40 @@ Process::Process(int bursts[], int i_o[], string name, int burstSize, int ioSize
 
 }
 
+// Destructor
 Process::~Process()
 {
-	cout << "Processes are destroyed" << endl;
+	//cout << "Processes are destroyed" << endl;
 }
+
+/*---------Function definitions-------------*/
+
+// Function displays the results of the scheduling algorithm
+void results()
+{
+	cout << "Current Time: " + to_string(currentTime) << endl;
+	if (readyQueue.size() == 0)
+	{
+		cout << "Next Process on the CPU:: NOTHING" << endl;
+	}
+	else
+	{
+		cout << "Next process on the CPU:: " + readyQueue.front().name << endl;
+	}
+	cout << "........................................" << endl;
+	cout << "List of processes in the ready queue:" << endl;
+	cout << "       Process      Burst";
+
+	// Loop for displaying the processes and bursts
+	for (int i = 0; i < readyQueue.size(); i++)
+	{
+		if (readyQueue.front().arrivalTime <= currentTime)
+		{
+
+		}
+	}
+}
+
 
 int main()
 {
@@ -69,9 +109,6 @@ int main()
 	Process P7(p7bursts, p7i_o, "P7", sizeof(p7bursts) / sizeof(p7bursts[0]), sizeof(p7i_o) / sizeof(p7i_o[0]));
 	Process P8(p8bursts, p8i_o, "P8", sizeof(p8bursts) / sizeof(p8bursts[0]), sizeof(p8i_o) / sizeof(p8i_o[0]));
 
-	queue<Process> readyQueue;   // Queue variable that holds all the processes in the Ready Queue
-	queue<Process> ioQueue;		 // Queue variable that holds all the processes in the I/O Queue
-
 	// All processes are pushed into the Ready Queue, and start at arrival time 0
 	readyQueue.push(P1);
 	readyQueue.push(P2);
@@ -83,6 +120,7 @@ int main()
 	readyQueue.push(P8);
 	
 
+	results();
 
 
 }
